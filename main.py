@@ -2,10 +2,28 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from typing import Literal, Annotated
 from pydantic import BaseModel , Field, computed_field
-import pickle
+import pickle 
+import os
+import requests
 import pandas as pd
+import joblib
 
-with open("Mentox/capstone_project_2/model.pkl", "rb") as f:
+MODEL_URL = "https://github.com/Earth-Go/Electricity-cost-predictor/releases/download/v1.0/model.pkl"
+MODEL_PATH = "model.pkl"
+
+if not os.path.exists(MODEL_PATH):
+    response = requests.get(MODEL_URL)
+    if response.status_code == 200:
+        with open(MODEL_PATH, "wb") as f:
+            f.write(response.content)
+    else:
+        raise Exception(f"Failed to download model.pkl: {response.status_code}")
+
+# Load the model
+model = joblib.load(MODEL_PATH)
+
+
+with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
 app= FastAPI()
@@ -35,3 +53,4 @@ def predict_cost(data : Input):
 
     prediction =model.predict(input_df)[0]
     return JSONResponse(status_code=200 , content=("Predicted Cost is : " , prediction))
+
