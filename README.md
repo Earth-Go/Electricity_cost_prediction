@@ -10,5 +10,5 @@ A FastAPI project to predict electricity costs using a trained ML model.
 
 ## Deployment
 
-- Hosted on Render
+- Hosted on Render : https://frontend-for-electricity-cost.onrender.com/
 - Model auto-downloaded from GitHub Releases
