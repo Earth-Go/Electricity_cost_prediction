@@ -22,10 +22,6 @@ if not os.path.exists(MODEL_PATH):
 # Load the model
 model = joblib.load(MODEL_PATH)
 
-
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
-
 app= FastAPI()
 
 class Input(BaseModel):
