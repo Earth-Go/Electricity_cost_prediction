@@ -8,7 +8,7 @@ import requests
 import pandas as pd
 import joblib
 
-MODEL_URL = "https://github.com/Earth-Go/Electricity-cost-predictor/releases/download/v1.0/model.pkl"
+MODEL_URL = "https://github.com/Earth-Go/Electricity_cost_predictor/releases/download/v1.0/model.pkl"
 MODEL_PATH = "model.pkl"
 
 if not os.path.exists(MODEL_PATH):
